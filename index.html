@@ -1,0 +1,51 @@
+<title>hello world</title>
+<h1>Start typing to start, press the escape key to reset :)</h1>
+
+<body style="font-size: 25px">
+    Some say the world will end in fire,<br>
+    Some say in ice.<br>
+    From what I’ve tasted of desire<br>
+    I hold with those who favor fire.<br>
+    But if it had to perish twice,<br>
+    I think I know enough of hate<br>
+    To say that for destruction ice<br>
+    Is also great<br>
+    And would suffice.<br>
+</body>
+<h2>Your average result is: </h2>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.addEventListener('keydown', logDown)
+        document.addEventListener('keyup', logUp)
+    
+        let startTimeMap = {}
+        let currentKey
+        let times = []
+        let total = 0
+        let n = 0
+        let header = document.querySelector('h2')
+    
+        function logDown(e) {
+            if (e.key === "Escape") {
+                total = 0
+                n = 0
+                startTimeMap = {}
+                times = []
+            }
+            startTimeMap[e.keyCode] = Date.now()
+        }
+    
+        function logUp(e) {
+            if (Date.now() - startTimeMap[e.keyCode]) times.push(Date.now() - startTimeMap[e.keyCode])
+
+            times.forEach(function(time) {
+                total += time
+                n++
+            })
+
+            header.innerHTML = `Your average result is: ${total/n}`
+        }
+    });
+
+</script>
